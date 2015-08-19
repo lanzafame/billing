@@ -1,0 +1,21 @@
+{
+  "name": "billing_estimation",
+  "version": "0.0.1",
+  "authors": [
+    "Adrian Lanzafame <adrianlanzafame92@gmail.com>"
+  ],
+  "description": "Billing estimation module for Redeye Technical Challenge",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "~0.97.0",
+    "jquery": "~2.1.4"
+  }
+}

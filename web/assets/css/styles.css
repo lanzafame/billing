@@ -1,0 +1,7 @@
+h1 .heading-divider{
+  display:block;
+  width:60px;
+  height:3px;
+  background:#e53935;
+  margin:15px auto
+}
