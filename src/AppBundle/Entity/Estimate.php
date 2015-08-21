@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Estimate
  *
- * @ORM\Table()
+ * @ORM\Table("estimates")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\EstimateRepository")
  */
 class Estimate
@@ -88,7 +88,7 @@ class Estimate
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -111,7 +111,7 @@ class Estimate
     /**
      * Get totalArtefacts
      *
-     * @return integer 
+     * @return integer
      */
     public function getTotalArtefacts()
     {
@@ -134,7 +134,7 @@ class Estimate
     /**
      * Get removedArtefacts
      *
-     * @return integer 
+     * @return integer
      */
     public function getRemovedArtefacts()
     {
@@ -157,7 +157,7 @@ class Estimate
     /**
      * Get foldedArtefacts
      *
-     * @return integer 
+     * @return integer
      */
     public function getFoldedArtefacts()
     {
@@ -180,7 +180,7 @@ class Estimate
     /**
      * Get artefactsInRange
      *
-     * @return array 
+     * @return array
      */
     public function getArtefactsInRange()
     {
@@ -203,7 +203,7 @@ class Estimate
     /**
      * Get priceForTierPerMonth
      *
-     * @return array 
+     * @return array
      */
     public function getPriceForTierPerMonth()
     {
@@ -226,7 +226,7 @@ class Estimate
     /**
      * Get duCheckSum
      *
-     * @return integer 
+     * @return integer
      */
     public function getDuCheckSum()
     {
@@ -249,7 +249,7 @@ class Estimate
     /**
      * Get pricePerMonth
      *
-     * @return string 
+     * @return string
      */
     public function getPricePerMonth()
     {
@@ -272,7 +272,7 @@ class Estimate
     /**
      * Get avgPricePerDrawingPerMonth
      *
-     * @return string 
+     * @return string
      */
     public function getAvgPricePerDrawingPerMonth()
     {
@@ -295,7 +295,7 @@ class Estimate
     /**
      * Get pricePerAnnum
      *
-     * @return string 
+     * @return string
      */
     public function getPricePerAnnum()
     {

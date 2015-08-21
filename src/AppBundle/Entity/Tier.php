@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Tier
  *
- * @ORM\Table()
+ * @ORM\Table("tiers")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\TierRepository")
  */
 class Tier
@@ -60,7 +60,7 @@ class Tier
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -83,7 +83,7 @@ class Tier
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -106,7 +106,7 @@ class Tier
     /**
      * Get price
      *
-     * @return string 
+     * @return string
      */
     public function getPrice()
     {
@@ -129,7 +129,7 @@ class Tier
     /**
      * Get sizeRange
      *
-     * @return integer 
+     * @return integer
      */
     public function getSizeRange()
     {
@@ -152,7 +152,7 @@ class Tier
     /**
      * Get minRange
      *
-     * @return integer 
+     * @return integer
      */
     public function getMinRange()
     {
@@ -175,7 +175,7 @@ class Tier
     /**
      * Get maxRange
      *
-     * @return integer 
+     * @return integer
      */
     public function getMaxRange()
     {

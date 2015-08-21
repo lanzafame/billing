@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Client
  *
- * @ORM\Table()
+ * @ORM\Table("client")
  * @ORM\Entity
  */
 class Client
@@ -46,7 +46,7 @@ class Client
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,7 +69,7 @@ class Client
     /**
      * Get estimatedArtefacts
      *
-     * @return integer 
+     * @return integer
      */
     public function getEstimatedArtefacts()
     {
@@ -92,7 +92,7 @@ class Client
     /**
      * Get duplicates
      *
-     * @return integer 
+     * @return integer
      */
     public function getDuplicates()
     {
@@ -115,7 +115,7 @@ class Client
     /**
      * Get versions
      *
-     * @return integer 
+     * @return integer
      */
     public function getVersions()
     {
