@@ -1,0 +1,124 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Client
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Client
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estimatedArtefacts", type="integer")
+     */
+    private $estimatedArtefacts;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="duplicates", type="integer")
+     */
+    private $duplicates;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="versions", type="integer")
+     */
+    private $versions;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set estimatedArtefacts
+     *
+     * @param integer $estimatedArtefacts
+     * @return Client
+     */
+    public function setEstimatedArtefacts($estimatedArtefacts)
+    {
+        $this->estimatedArtefacts = $estimatedArtefacts;
+
+        return $this;
+    }
+
+    /**
+     * Get estimatedArtefacts
+     *
+     * @return integer 
+     */
+    public function getEstimatedArtefacts()
+    {
+        return $this->estimatedArtefacts;
+    }
+
+    /**
+     * Set duplicates
+     *
+     * @param integer $duplicates
+     * @return Client
+     */
+    public function setDuplicates($duplicates)
+    {
+        $this->duplicates = $duplicates;
+
+        return $this;
+    }
+
+    /**
+     * Get duplicates
+     *
+     * @return integer 
+     */
+    public function getDuplicates()
+    {
+        return $this->duplicates;
+    }
+
+    /**
+     * Set versions
+     *
+     * @param integer $versions
+     * @return Client
+     */
+    public function setVersions($versions)
+    {
+        $this->versions = $versions;
+
+        return $this;
+    }
+
+    /**
+     * Get versions
+     *
+     * @return integer 
+     */
+    public function getVersions()
+    {
+        return $this->versions;
+    }
+}
