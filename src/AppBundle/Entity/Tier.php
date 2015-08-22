@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use JsonSerializable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="tiers")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\TierRepository")
  */
-class Tier
+class Tier implements JsonSerializable
 {
     /**
      * @var integer
@@ -180,5 +181,17 @@ class Tier
     public function getMaxRange()
     {
         return $this->maxRange;
+    }
+
+    public function jsonSerialize()
+    {
+      return array(
+          'id' => $this->id,
+          'name' => $this->name,
+          'price' => $this->price,
+          'range' => $this->sizeRange,
+          'min_range' => $this->minRange,
+          'max_range' => $this->maxRange,
+      );
     }
 }
