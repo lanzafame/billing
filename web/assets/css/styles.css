@@ -5,3 +5,23 @@ h1 .heading-divider{
   background:#e53935;
   margin:15px auto
 }
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+ color: #e53935;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+ border-bottom: 1px solid #e53935;
+ box-shadow: 0 1px 0 0 #e53935;
+}
+
+/* label focus color */
+.input-field input[type=number]:focus + label {
+ color: #e53935;
+}
+/* label underline focus color */
+.input-field input[type=number]:focus {
+ border-bottom: 1px solid #e53935;
+ box-shadow: 0 1px 0 0 #e53935;
+}
