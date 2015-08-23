@@ -2,18 +2,20 @@ function getResponse(url, callback) {
   $.getJSON(url, callback);
 }
 
-// function getTiers() {
-//   var res = $.getJSON('/getTiers');
-//   var tiers = res['responseJSON'];
-//   function(tiers) {
-//     tiers.forEach(function(val) {
-//       $('#tiertable').html('<tr id="' + val.id + '"><td>'+val.name+'</td><td>'+val.price
-//       +'</td><td>'+val.sizeRange+'</td><td>'+val.minRange+' - '+val.maxRange+'</td>');
-//     });
-//   };
-// }
+function deleteTableRows(callback) {
+  $('tbody#tiertable').empty();
+}
 
-function sendTierForm() {
+function getTiers() {
+  getResponse('/getTiers', function(tiers) {
+    for (var i = 0; i < tiers.length; i++) {
+      $('#tiertable').append('<tr id="' + tiers[i].id + '"><td>'+tiers[i].name+'</td><td>'+tiers[i].price
+      +'</td><td>'+tiers[i].sizeRange+'</td><td>'+tiers[i].minRange+' - '+tiers[i].maxRange+'</td>');
+    }
+  });
+}
+
+function sendTierForm(callback) {
   $('#addtierbtn').click(function() {
     var formdata = $(':input');
     // var formdata = $('#tierform');
@@ -28,19 +30,23 @@ function sendTierForm() {
   });
 }
 
-function removeTier() {
-
+function removeTier(callback) {
+  $('#removetierbtn').click(function() {
+    var id = $(':input#tier_id');
+    console.log(id);
+    $.ajax({
+        method: "POST",
+        url: "/removeTier/" + id[0].value,
+        success: function(response) {
+          console.log("Success");
+        }
+    });
+  });
 }
 
 
 $(document).ready(function() {
-  getResponse('/getTiers', function(tiers) {
-    console.log(tiers);
-    for (var i = 0; i < tiers.length; i++) {
-      $('#tiertable').append('<tr id="' + tiers[i].id + '"><td>'+tiers[i].name+'</td><td>'+tiers[i].price
-      +'</td><td>'+tiers[i].sizeRange+'</td><td>'+tiers[i].minRange+' - '+tiers[i].maxRange+'</td>');
-    }
-  });
-  sendTierForm();
+  sendTierForm(deleteTableRows(getTiers()));
+  removeTier(deleteTableRows(getTiers()));
   $('.modal-trigger').leanModal();
 });

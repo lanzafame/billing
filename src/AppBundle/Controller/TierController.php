@@ -82,13 +82,32 @@ class TierController extends Controller
     }
 
     /**
-     * @Route("/removeTier")
+     * @Route("/removeTier/{id}")
      * @Method("POST")
      * @Template()
      */
-    public function removeTierAction()
+    public function removeTierAction($id)
     {
+      $em = $this->getDoctrine()->getManager();
+      $tier = $em->getRepository('AppBundle:Tier')->find($id);
 
+      if (!$tier) {
+        throw $this->createNotFoundException(
+          'No tier found for id '.$id
+        );
+      }
+
+      $em->remove($tier);
+      $em->flush();
+
+      $response = new JsonResponse(
+          array(
+              'message' => 'Success!'
+          ),
+          200
+      );
+
+      return $response;
     }
 
 }
