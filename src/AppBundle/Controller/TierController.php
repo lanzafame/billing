@@ -39,18 +39,12 @@ class TierController extends Controller
 
       $tiers = $query->getArrayResult();
 
-      // $response = $serializer->serialize($tiers, 'json');
-      // $response = new JsonResponse();
-      // $response->setData(array('tiers' => $tiers));
       $response = json_encode($tiers);
-      // return $response;
       return new Response($response, 200, array(
           'Content-Type' => 'application/json'
       ));
-
-      // return new JsonResponse($tiers);
-      // return new Response($response);
     }
+
     /**
      * @Route("/createTier")
      * @Method("POST")
@@ -72,8 +66,7 @@ class TierController extends Controller
 
       $response = new JsonResponse(
           array(
-              'message' => 'Success!',
-              'tier' => $tier
+              'message' => 'Success!'
           ),
           200
       );

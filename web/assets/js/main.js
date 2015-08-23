@@ -4,6 +4,7 @@ function getResponse(url, callback) {
 
 function deleteTableRows(callback) {
   $('tbody#tiertable').empty();
+  callback;
 }
 
 function getTiers() {
@@ -15,29 +16,62 @@ function getTiers() {
   });
 }
 
-function sendTierForm(callback) {
+// function formSubmit(submitEvent) {
+//   var name = document.querySelector('input').value
+//   request({
+//     uri: "http://example.com/upload",
+//     body: name,
+//     method: "POST"
+//   }, postResponse)
+// }
+//
+// function postResponse(err, response, body) {
+//   var statusMessage = document.querySelector('.status')
+//   if (err) return statusMessage.value = err
+//   statusMessage.value = body
+// }
+
+// document.querySelector('form').onsubmit = formSubmit
+
+
+function sendTierForm() {
   $('#addtierbtn').click(function() {
-    var formdata = $(':input');
-    // var formdata = $('#tierform');
+    // var formdata = $(':input#tierform');
+    var formdata = $('#tierform');
     $.ajax({
         method: "POST",
         url: "/createTier",
         data: formdata,
+        beforeSend: function(formdata) {
+          console.log(formdata);
+        },
+        error: function(xhr, error) {
+          console.debug(xhr); console.debug(error);
+        },
         success: function(response) {
+          deleteTableRows();
+          getTiers();
           console.log(response);
         }
     });
   });
 }
 
-function removeTier(callback) {
+function removeTier() {
   $('#removetierbtn').click(function() {
     var id = $(':input#tier_id');
-    console.log(id);
     $.ajax({
         method: "POST",
         url: "/removeTier/" + id[0].value,
+        beforeSend: function(id) {
+          console.log(id);
+        },
+        error: function(xhr, error) {
+          console.debug(xhr); console.debug(error);
+        },
         success: function(response) {
+          deleteTableRows();
+          getTiers();
           console.log("Success");
         }
     });
@@ -46,7 +80,8 @@ function removeTier(callback) {
 
 
 $(document).ready(function() {
-  sendTierForm(deleteTableRows(getTiers()));
-  removeTier(deleteTableRows(getTiers()));
+  getTiers();
+  sendTierForm(deleteTableRows());
+  removeTier(deleteTableRows());
   $('.modal-trigger').leanModal();
 });
