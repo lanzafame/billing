@@ -10,7 +10,7 @@ function deleteTableRows(callback) {
 function getTiers() {
   getResponse('/getTiers', function(tiers) {
     for (var i = 0; i < tiers.length; i++) {
-      $('#tiertable').append('<tr id="' + tiers[i].id + '"><td>'+tiers[i].name+'</td><td>'+tiers[i].price
+      $('#tiertable').append('<tr id="' + tiers[i].id + '"><td>'+tiers[i].id+'<td>'+tiers[i].name+'</td><td>'+tiers[i].price
       +'</td><td>'+tiers[i].sizeRange+'</td><td>'+tiers[i].minRange+' - '+tiers[i].maxRange+'</td>');
     }
   });
@@ -36,8 +36,8 @@ function getTiers() {
 
 function sendTierForm() {
   $('#addtierbtn').click(function() {
-    // var formdata = $(':input#tierform');
-    var formdata = $('#tierform');
+    var formdata = $('input');
+//    var formdata = $('#tierform');
     $.ajax({
         method: "POST",
         url: "/createTier",
@@ -59,10 +59,10 @@ function sendTierForm() {
 
 function removeTier() {
   $('#removetierbtn').click(function() {
-    var id = $(':input#tier_id');
+    var id = $(':input');
     $.ajax({
         method: "POST",
-        url: "/removeTier/" + id[0].value,
+        url: "/removeTier/" + id[id.length - 1].value,
         beforeSend: function(id) {
           console.log(id);
         },

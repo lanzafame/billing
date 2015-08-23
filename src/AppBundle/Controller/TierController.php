@@ -64,9 +64,12 @@ class TierController extends Controller
       $em->persist($tier);
       $em->flush();
 
+	  $jreq = $this->getRequest()->request->all();
+
       $response = new JsonResponse(
           array(
-              'message' => 'Success!'
+              'message' => 'Success!',
+			  'request' => $jreq
           ),
           200
       );
