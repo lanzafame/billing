@@ -1,3 +1,23 @@
+$.fn.serializeObject = function() {
+  var o = {};
+  var a = this.serializeArray();
+
+  $.each(a, function() {
+	if (o[this.name] !== undefined) {
+	  if (!o[this.name].push) {
+		o[this.name] = [o[this.name]];
+	  }
+	  o[this.name].push(this.value || '');
+	} else {
+	  o[this.name] = this.value || '';
+	}
+  });
+
+  return o;
+};
+
+
+
 function getResponse(url, callback) {
   $.getJSON(url, callback);
 }
@@ -16,35 +36,13 @@ function getTiers() {
   });
 }
 
-// function formSubmit(submitEvent) {
-//   var name = document.querySelector('input').value
-//   request({
-//     uri: "http://example.com/upload",
-//     body: name,
-//     method: "POST"
-//   }, postResponse)
-// }
-//
-// function postResponse(err, response, body) {
-//   var statusMessage = document.querySelector('.status')
-//   if (err) return statusMessage.value = err
-//   statusMessage.value = body
-// }
-
-// document.querySelector('form').onsubmit = formSubmit
-
-
 function sendTierForm() {
   $('#addtierbtn').click(function() {
-    var formdata = $('input');
-//    var formdata = $('#tierform');
+	var data = $('form').serializeArray();
     $.ajax({
         method: "POST",
         url: "/createTier",
-        data: formdata,
-        beforeSend: function(formdata) {
-          console.log(formdata);
-        },
+        data: data,
         error: function(xhr, error) {
           console.debug(xhr); console.debug(error);
         },
@@ -59,10 +57,11 @@ function sendTierForm() {
 
 function removeTier() {
   $('#removetierbtn').click(function() {
-    var id = $(':input');
+	var data = $('form').serializeArray();
     $.ajax({
         method: "POST",
-        url: "/removeTier/" + id[id.length - 1].value,
+	  //this should work with key/value now
+        url: "/removeTier/" + data[5].value,
         beforeSend: function(id) {
           console.log(id);
         },
@@ -78,10 +77,29 @@ function removeTier() {
   });
 }
 
+function sendClientForm() {
+  $('#getestimatebtn').click(function() {
+	var data = $('form').serializeObject();
+	$.ajax({
+	  method: "POST",
+	  url: "/newClient",
+	  data: data,
+	  error: function(xhr, error) {
+		console.debug(xhr); console.debug(error);
+	  },
+	  success: function(response) {
+		console.log("Success");
+		console.log(response);
+	  }
+	});
+  });
+}
+
 
 $(document).ready(function() {
   getTiers();
-  sendTierForm(deleteTableRows());
-  removeTier(deleteTableRows());
+  sendTierForm();
+  removeTier();
+  sendClientForm();
   $('.modal-trigger').leanModal();
 });

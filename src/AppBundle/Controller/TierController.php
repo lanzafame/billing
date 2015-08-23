@@ -7,17 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
-$encoders = array(new JsonEncoder());
-$normalizers = array(new ObjectNormalizer());
-
-$serializer = new Serializer($normalizers, $encoders);
 
 class TierController extends Controller
 {
@@ -28,9 +20,6 @@ class TierController extends Controller
     */
     public function getTiersAction()
     {
-      // $repository = $this->getDoctrine()
-          // ->getRepository('AppBundle:Tier');
-
       $em = $this->getDoctrine()->getManager();
       $query = $em->createQuery(
         'SELECT t
@@ -64,12 +53,9 @@ class TierController extends Controller
       $em->persist($tier);
       $em->flush();
 
-	  $jreq = $this->getRequest()->request->all();
-
       $response = new JsonResponse(
           array(
               'message' => 'Success!',
-			  'request' => $jreq
           ),
           200
       );

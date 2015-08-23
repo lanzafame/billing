@@ -2,22 +2,22 @@
 <div class="row">
   <div class="col s8 offset-s2">
 	<div class="card-panel">
-	  <form>
+	  <form id="clientform">
 		<h5 class="red-text">Estimate</h5>
-		<div class="row white-text valign-wrapper">
+		<div class="row valign-wrapper">
 		  <div class="input-field col s3">
-			<input id="total" type="number">
+			<input id="total" name="total" type="number" class="validate">
 			<label for="total">Total</label>
 		  </div>
 		  <div class="input-field col s3">
-			<input id="duplicates" type="number">
+			<input id="duplicates" name="duplicates" type="number" class="validate">
 			<label for="duplicates">Duplicates</label>
 		  </div>
 		  <div class="input-field col s3">
-			<input id="versions" type="number">
+			<input id="versions" name="versions" type="number" class="validate">
 			<label for="versions">Versions</label>
 		  </div>
-		  <a class="waves-effect waves-light btn red lighten-1"><i class="material-icons small right">input</i>Get</a>
+		  <a class="waves-effect waves-light btn red lighten-1" id="getestimatebtn"><i class="material-icons small right">input</i>Get</a>
 		</div>
 	  </form>
 	</div>

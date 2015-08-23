@@ -32,7 +32,7 @@ class Tier implements JsonSerializable
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", precision=15, scale=2))
      */
     private $price;
 
