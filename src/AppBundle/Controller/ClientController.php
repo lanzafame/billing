@@ -22,20 +22,15 @@ class ClientController extends Controller
     {
       $client = new Client();
       $client->setEstimatedArtefacts($request->get('total'));
-      $client->setDuplicates($request->get('duplicates'));
-      $client->setVersions($request->get('versions'));
+      $client->setDuplicates($request->get('duplicates')/100);
+      $client->setVersions($request->get('versions')/100);
 
       $em = $this->getDoctrine()->getManager();
 
       $em->persist($client);
       $em->flush();
 
-      $response = new JsonResponse(
-          array(
-              'message' => 'Success!',
-          ),
-          200
-      );
+	  $response = $this->forward('AppBundle:Estimate:getEstimate', array('client' => $client));
 
       return $response;
 	}

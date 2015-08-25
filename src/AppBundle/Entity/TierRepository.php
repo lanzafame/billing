@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class TierRepository extends EntityRepository
 {
+
+  public function findTiersOrderedByMinRange()
+  {
+	return $this->getEntityManager()
+	  ->createQuery(
+		'SELECT t FROM AppBundle:Tier t ORDER BY t.minRange ASC'
+	  )
+	  ->getResult();
+  }
 }

@@ -194,4 +194,25 @@ class Tier implements JsonSerializable
           'max_range' => $this->maxRange,
       );
     }
+
+	public function getTierNameByMinRange($tiers, $minRange)
+	{
+	  foreach ($tiers as $t)
+	  {
+		if ($t->minRange == $minRange)
+		{
+		  return $t->name;
+		}
+	  }
+	}
+
+	public static function cmp($a, $b)
+	{
+	  if ($a->minRange == $b->minRange)
+	  {
+		return 0;
+	  }
+	  return ($a->minRange < $b->minRange) ? -1 : 1;
+	}
+
 }

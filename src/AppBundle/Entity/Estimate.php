@@ -2,7 +2,10 @@
 
 namespace AppBundle\Entity;
 
+use JsonSerializable;
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Tier;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * Estimate
@@ -10,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="estimates")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\EstimateRepository")
  */
-class Estimate
+class Estimate //extends JsonSerializable
 {
     /**
      * @var integer
@@ -301,4 +304,82 @@ class Estimate
     {
         return $this->pricePerAnnum;
     }
+
+//    public function jsonSerialize()
+//    {
+//      return array(
+//          'id' => $this->id,
+//		  'total_artefacts' => $this->totalArtefacts,
+//		  'removed_artefacts' => $this->removedArtefacts,
+//		  'folded_artefacts' => $this->foldedArtefacts,
+//		  'artefacts_in_range' => $this->artefactsInRange,
+//		  'price_for_tier_per_month' => $this->priceForTierPerMonth,
+//		  'du_checksum' => $this->duCheckSum,
+//		  'price_per_month' => $this->pricePerMonth,
+//		  'avg_price_per_drawing_per_month' => $this->avgPricePerDrawingPerMonth,
+//		  'price_per_annum' => $this->pricePerAnnum,
+//      );
+//    }
+
+	public function totalUnits($estimated)
+	{
+	  return $estimated - $this->removedArtefacts - $this->foldedArtefacts;
+	}
+
+	public function removedUnits($estimated, $duplicates)
+	{
+	  return $estimated * $duplicates;
+	}
+
+	public function foldedUnits($estimated, $removed, $versions)
+	{
+	  return ($estimated - $removed) * $versions;
+	}
+
+	public function negToZero($int)
+	{
+	  if ($int < 0) {
+		return 0;
+	  } else {
+		return $int;
+	  }
+	}
+
+	public function tierify($units, $maxRange)
+	{
+	  if (is_null($units['left']) || $units['left'] != 0) {
+		$units['left'] = $this->negToZero($units['total'] - $maxRange);
+		$units['inTier'] = $units['total'] - $units['left'] - $units['inTier'];
+	  } elseif ($units['left'] == 0) {
+		$units['inTier'] = 0;
+	  }
+	  return $units;
+	}
+
+	public function duCheckSumFunc($total, $unitsPerTiers)
+	{
+	  return $total - array_sum($unitsPerTiers);
+	}
+
+	public function priceForTierPerMonthFunc($unitsPTier, $price)
+	{
+	  return $unitsPTier * $price;
+	}
+
+	public function pricePerMonthFunc($priceTiersMonth)
+	{
+	  return array_sum($priceTiersMonth);
+	}
+
+	public function avgPricePerDrawingPerMonthFunc($total, $pricePerMonth)
+	{
+	  return $pricePerMonth / $total;
+	}
+
+	public function pricePerAnnumFunc($pricePerMonth)
+	{
+	  return $pricePerMonth * 12;
+	}
+
+
 }
