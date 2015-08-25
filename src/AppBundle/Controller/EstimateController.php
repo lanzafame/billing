@@ -72,11 +72,15 @@ class EstimateController extends Controller
       $em->persist($estimate);
       $em->flush();
 
-      $response = json_encode($estimate);
-      return new Response($response, 200, array(
-          'Content-Type' => 'application/json'
-      ));
 
+	  $response = new JsonResponse(
+		  array(
+			  'estimate' => json_encode($estimate),
+		  ),
+		  200
+	  );
+
+	  return $response;
 	}
 
 }

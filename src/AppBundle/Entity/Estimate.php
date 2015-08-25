@@ -13,7 +13,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * @ORM\Table(name="estimates")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\EstimateRepository")
  */
-class Estimate //extends JsonSerializable
+class Estimate implements JsonSerializable
 {
     /**
      * @var integer
@@ -69,21 +69,22 @@ class Estimate //extends JsonSerializable
     /**
      * @var string
      *
-     * @ORM\Column(name="pricePerMonth", type="decimal")
+     * @ORM\Column(name="pricePerMonth", type="decimal", precision=8, scale=2)
      */
     private $pricePerMonth;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="avgPricePerDrawingPerMonth", type="decimal")
+     * @ORM\Column(name="avgPricePerDrawingPerMonth", type="decimal", precision=8, scale=2)
+
      */
     private $avgPricePerDrawingPerMonth;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pricePerAnnum", type="decimal")
+     * @ORM\Column(name="pricePerAnnum", type="decimal", precision=8, scale=2)
      */
     private $pricePerAnnum;
 
@@ -321,19 +322,19 @@ class Estimate //extends JsonSerializable
 //      );
 //    }
 
-	public function totalUnits($estimated)
+	public function totalUnits($estimated, $removed, $folded)
 	{
-	  return $estimated - $this->removedArtefacts - $this->foldedArtefacts;
+	  return $estimated - $removed - $folded;
 	}
 
 	public function removedUnits($estimated, $duplicates)
 	{
-	  return $estimated * $duplicates;
+	  return $estimated * ($duplicates);
 	}
 
 	public function foldedUnits($estimated, $removed, $versions)
 	{
-	  return ($estimated - $removed) * $versions;
+	  return ($estimated - $removed) * ($versions);
 	}
 
 	public function negToZero($int)
@@ -381,5 +382,20 @@ class Estimate //extends JsonSerializable
 	  return $pricePerMonth * 12;
 	}
 
+	public function jsonSerialize()
+	{
+	  return array(
+		  'id' => $this->id,
+		  'total_artefacts' => $this->totalArtefacts,
+		  'removed_artefacts' => $this->removedArtefacts,
+		  'folded_artefacts' => $this->foldedArtefacts,
+		  'artefacts_in_range' => $this->artefactsInRange,
+		  'price_for_tier_per_month' => $this->priceForTierPerMonth,
+		  'du_check_sum' => $this->duCheckSum,
+		  'price_per_month' => $this->pricePerMonth,
+		  'avg_price_per_drawing_per_month' => $this->avgPricePerDrawingPerMonth,
+		  'price_per_annum' => $this->pricePerAnnum,
+		);
+  }
 
 }

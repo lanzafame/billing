@@ -22,8 +22,8 @@ class ClientController extends Controller
     {
       $client = new Client();
       $client->setEstimatedArtefacts($request->get('total'));
-      $client->setDuplicates($request->get('duplicates')/100);
-      $client->setVersions($request->get('versions')/100);
+      $client->setDuplicates($request->get('duplicates')/100.0);
+      $client->setVersions($request->get('versions')/100.0);
 
       $em = $this->getDoctrine()->getManager();
 

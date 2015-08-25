@@ -29,16 +29,16 @@ class Client
     private $estimatedArtefacts;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="duplicates", type="integer")
+     * @ORM\Column(name="duplicates", type="decimal", precision=8, scale=2)
      */
     private $duplicates;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="versions", type="integer")
+     * @ORM\Column(name="versions", type="decimal", precision=8, scale=2)
      */
     private $versions;
 
@@ -79,7 +79,7 @@ class Client
     /**
      * Set duplicates
      *
-     * @param integer $duplicates
+     * @param string $duplicates
      * @return Client
      */
     public function setDuplicates($duplicates)
@@ -92,7 +92,7 @@ class Client
     /**
      * Get duplicates
      *
-     * @return integer
+     * @return string
      */
     public function getDuplicates()
     {
@@ -102,7 +102,7 @@ class Client
     /**
      * Set versions
      *
-     * @param integer $versions
+     * @param string $versions
      * @return Client
      */
     public function setVersions($versions)
@@ -115,7 +115,7 @@ class Client
     /**
      * Get versions
      *
-     * @return integer
+     * @return string
      */
     public function getVersions()
     {
