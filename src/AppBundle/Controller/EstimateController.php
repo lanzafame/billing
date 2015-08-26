@@ -75,7 +75,7 @@ class EstimateController extends Controller
 
 	  $response = new JsonResponse(
 		  array(
-			  'estimate' => json_encode($estimate),
+			  'estimate' => $estimate,
 		  ),
 		  200
 	  );
