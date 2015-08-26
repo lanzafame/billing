@@ -14,6 +14,8 @@ php app/console doctrine:database:create
 
 php app/console doctrine:schema:update --force
 
+bower install
+
 php app/console server:run # if you are running this on a remote machine append
 "-- 0.0.0.0:8000"
 
