@@ -25,3 +25,7 @@ h1 .heading-divider{
  border-bottom: 1px solid #e53935;
  box-shadow: 0 1px 0 0 #e53935;
 }
+
+table {
+  empty-cells: show;
+}
