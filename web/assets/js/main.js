@@ -26,11 +26,12 @@ function deleteTableRows(callback) {
 }
 
 function getTiers() {
+  $('#tier-results-header').empty();
   getResponse('/getTiers', function(tiers) {
     for (var i = 0; i < tiers.length; i++) {
       $('#tiertable').append('<tr id="' + tiers[i].id + '"><td>'+tiers[i].id+'</td><td>'+tiers[i].name+'</td><td>'+tiers[i].price
       +'</td><td>'+tiers[i].sizeRange+'</td><td>'+tiers[i].minRange+' - '+tiers[i].maxRange+'</td>');
-	  $('#tier-results-header').html('<th data-field="'+tiers[i].id+'">'+tiers[i].name+'</th>');
+	  $('#tier-results-header').append('<th data-field="'+tiers[i].id+'">'+tiers[i].name+'</th>');
     }
   });
 }
@@ -89,7 +90,6 @@ function sendClientForm() {
 		console.debug(xhr); console.debug(error);
 	  },
 	  success: function(response) {
-		console.log(response.estimate);
 		displayEstimate(response.estimate);
 		displayTierResults(response.estimate);
 		displayCostResults(response.estimate);
