@@ -30,7 +30,7 @@ function getTiers() {
     for (var i = 0; i < tiers.length; i++) {
       $('#tiertable').append('<tr id="' + tiers[i].id + '"><td>'+tiers[i].id+'</td><td>'+tiers[i].name+'</td><td>'+tiers[i].price
       +'</td><td>'+tiers[i].sizeRange+'</td><td>'+tiers[i].minRange+' - '+tiers[i].maxRange+'</td>');
-	  $('#tier-results-header').append('<th data-field="'+tiers[i].id+'">'+tiers[i].name+'</th>');
+	  $('#tier-results-header').html('<th data-field="'+tiers[i].id+'">'+tiers[i].name+'</th>');
     }
   });
 }
