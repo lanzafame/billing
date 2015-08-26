@@ -1,5 +1,4 @@
 # Redeye Tech Challenge
-==============
 
 ## Installation
 
